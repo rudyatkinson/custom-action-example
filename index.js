@@ -1,8 +1,8 @@
 const core = require('@actions/core');
 const playFabServer = require("playfab-sdk/Scripts/PlayFab/PlayFabServer");
 
-const developerSecretKey = core.getInput('DEVELOPER_SECRET_KEY', {required: true});
-const titleId = core.getInput('TITLE_ID', {required: true});
+const developerSecretKey = core.getInput('developer-secret-key', {required: true});
+const titleId = core.getInput('title-id', {required: true});
 
 async function run()
 {
