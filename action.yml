@@ -5,6 +5,9 @@ runs:
   using: node12
   main: index.js
 inputs:
-  message:
+  DEVELOPER_SECRET_KEY:
     required: true
-    description: "Sample Input Description"
+    description: "Developer secret key has to be set to upload urls."
+  TITLE_ID:
+    required: true
+    description: "Title id has to be set to find title."
