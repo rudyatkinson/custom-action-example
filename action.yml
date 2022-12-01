@@ -1,0 +1,6 @@
+name: "PlayFab Azure Sync Action"
+description: "Sync Azure function to playfab automation after function app deployed."
+author: "Bilal-Arvis"
+runs: 
+  using: node12
+  main: index.js
