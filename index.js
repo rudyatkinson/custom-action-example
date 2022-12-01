@@ -13,7 +13,7 @@ async function run()
     console.log('Given developer secret key: ${developerSecretKey}');
     console.log('Given title id: ${titleId}');
 
-    const entityToken = playFabAuthentication.GetEntityToken;
+    const entityToken = playFabAuthentication.GetEntityToken();
     
     console.log('entity token: ' + entityToken);
 }
