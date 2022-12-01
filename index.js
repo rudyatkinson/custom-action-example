@@ -30,8 +30,18 @@ function GetEntityTokenCallback(error, result) {
 }
 
 function ListHttpFunctionsCallback(error, result) {
-    console.log(error);
-    console.log(result);
+    if(error == null){
+        console.log("ListHttpFunction succeeded.");
+    }
+    else{
+        console.log("Get an error during ListHttpFunction\n"+ error);
+    }
+
+    var functions = result.data["Functions"];
+    
+    functions.forEach(func => {
+        console.log(func);
+    });
 }
 
 run();
