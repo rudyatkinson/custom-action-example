@@ -4,3 +4,7 @@ author: "Bilal-Arvis"
 runs: 
   using: node12
   main: index.js
+inputs:
+  message:
+    required: true
+    description: "Sample Input Description"

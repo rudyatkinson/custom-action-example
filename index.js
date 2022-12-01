@@ -1,12 +1,15 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
 
-    (
-        async () => {
-            try {
-                core.notice("Calling our action");
-            } catch (error) {
-                core.setFailed(error.message);
-            }
-        }
-    )();
+const message = core.getInput('message', {required: true});
+ 
+
+async function run()
+{
+    try {
+        core.notice(message);
+    } catch (error) {
+        core.setFailed(error.message);
+    }
+}
+
+run();
