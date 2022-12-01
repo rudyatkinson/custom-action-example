@@ -6,8 +6,6 @@ const playFabCloudScript = require("playfab-sdk/Scripts/PlayFab/PlayFabCloudScri
 const developerSecretKey = core.getInput('developer-secret-key', {required: true});
 const titleId = core.getInput('title-id', {required: true});
 
-var entityToken = "";
-
 async function run()
 {
     playFabServer.settings.developerSecretKey = developerSecretKey;
@@ -15,9 +13,6 @@ async function run()
 
     var getEntityTokenRequest = {};
     playFabAuthentication.GetEntityToken(getEntityTokenRequest, GetEntityTokenCallback);
-
-    var listHttpFunctionsRequest = { EntityToken: entityToken };
-    playFabCloudScript.ListHttpFunctions(listHttpFunctionsRequest, ListHttpFunctionsCallback);
 }
 
 function GetEntityTokenCallback(error, result) {
@@ -27,8 +22,11 @@ function GetEntityTokenCallback(error, result) {
     else{
         console.log("Get an error during GetEntityToken\n"+ error);
     }
-    entityToken = result.data["EntityToken"];
-    console.log("Entity Token" + entityToken);
+
+    var entityToken = result.data["EntityToken"];
+
+    var listHttpFunctionsRequest = { EntityToken: entityToken };
+    playFabCloudScript.ListHttpFunctions(listHttpFunctionsRequest, ListHttpFunctionsCallback);
 }
 
 function ListHttpFunctionsCallback(error, result) {
