@@ -9,9 +9,8 @@ async function run()
     playFabServer.settings.developerSecretKey = developerSecretKey;
     playFabServer.settings.titleId = titleId;
     
-    core.debug(developerSecretKey);
-    core.notice(titleId);
-    console.log(titleId);
+    console.log('Given developer secret key: ${developerSecretKey}');
+    console.log('Given title id: ${titleId}');
 }
 
 run();
