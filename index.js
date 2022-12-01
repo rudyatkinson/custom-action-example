@@ -2,6 +2,7 @@ const core = require('@actions/core');
 const playFabServer = require("playfab-sdk/Scripts/PlayFab/PlayFabServer");
 const playFabAuthentication = require("playfab-sdk/Scripts/PlayFab/PlayFabAuthentication");
 const playFabCloudScript = require("playfab-sdk/Scripts/PlayFab/PlayFabCloudScript");
+const fetch = require('node-fetch');
 
 const developerSecretKey = core.getInput('developer-secret-key', { required: true });
 const titleId = core.getInput('title-id', { required: true });
