@@ -11,3 +11,15 @@ inputs:
   title-id:
     required: true
     description: "Title id has to be set to find title."
+  subscription-id:
+    required: true
+    description: "Subscription id which given in function app."
+  resource-group:
+    required: true
+    description: "Resource group name which is includes function app."
+  app-name:
+    required: true
+    description: "Function app name"
+  azure-authorization-key:
+    required: true
+    description: "Azure authorization key, you can access it from azure cli after you logged in."
