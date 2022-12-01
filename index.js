@@ -1,12 +1,12 @@
 const core = require('@actions/core');
 const playFabServer = require("playfab-sdk/Scripts/PlayFab/PlayFabServer");
 const playFabAuthentication = require("playfab-sdk/Scripts/PlayFab/PlayFabAuthentication");
-const playFabClient = require("playfab-sdk/Scripts/PlayFab/PlayFabClient");
+const playFabCloudScript = require("playfab-sdk/Scripts/PlayFab/PlayFabCloudScript");
 
 const developerSecretKey = core.getInput('developer-secret-key', {required: true});
 const titleId = core.getInput('title-id', {required: true});
 
-const entityToken = "";
+var entityToken = "";
 
 async function run()
 {
@@ -15,14 +15,25 @@ async function run()
 
     var getEntityTokenRequest = {};
     playFabAuthentication.GetEntityToken(getEntityTokenRequest, GetEntityTokenCallback);
-    
-    console.log('entity token: ' + entityToken == null);
+
+    var listHttpFunctionsRequest = { EntityToken: entityToken };
+    playFabCloudScript.ListHttpFunctions(listHttpFunctionsRequest, ListHttpFunctionsCallback);
 }
 
 function GetEntityTokenCallback(error, result) {
-    console.log(result.data["EntityToken"]);
+    if(error == null){
+        console.log("GetEntityToken succeeded.");
+    }
+    else{
+        console.log("Get an error during GetEntityToken\n"+ error);
+    }
     entityToken = result.data["EntityToken"];
     console.log("Entity Token" + entityToken);
+}
+
+function ListHttpFunctionsCallback(error, result) {
+    console.log(error);
+    console.log(result);
 }
 
 run();
