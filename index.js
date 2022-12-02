@@ -10,9 +10,6 @@ const titleId = core.getInput('title-id', { required: true });
 const subscriptionId = core.getInput('subscription-id', { required: true });
 const resourceGroup = core.getInput('resource-group', { required: true });
 const appName = core.getInput('app-name', { required: true });
-const azureAuthorizationKey = core.getInput('azure-authorization-key', { required: true });
-
-var accessData;
 
 async function run() {
     fs.readFile("./accessToken.json", "utf8", (err, jsonString) => {
@@ -20,10 +17,9 @@ async function run() {
             console.log("accessToken.json read failed:", err);
             return;
         }
-        console.log("File data:", jsonString);
-        accessData = JSON.parse(jsonString);
 
-        console.log('accessToken: ' + accessData.accessToken);
+        var accessData = JSON.parse(jsonString);
+
         GetAzureFunctionList(accessData);
     });
 
