@@ -18,17 +18,18 @@ async function run() {
         .then((response) => response.json())
         .then((json) => {
             accessData = JSON.parse(json);
-            console.log(json)
-        });
+            console.log(json);
+            console.log('accessToken: ' + accessData.accessToken);
 
-    console.log('accessToken: ' + accessData.accessToken);
+            GetAzureFunctionList(accessData);
+
+            var getEntityTokenRequest = {};
+        });
+    
 
     playFabServer.settings.developerSecretKey = developerSecretKey;
     playFabServer.settings.titleId = titleId;
 
-    GetAzureFunctionList();
-
-    var getEntityTokenRequest = {};
     playFabAuthentication.GetEntityToken(getEntityTokenRequest, GetEntityTokenCallback);
 }
 
@@ -61,12 +62,12 @@ function ListHttpFunctionsCallback(error, result) {
     });
 }
 
-function GetAzureFunctionList() {
+function GetAzureFunctionList(accessTokenData) {
 
     fetch('https://management.azure.com/subscriptions/' + subscriptionId + '/resourceGroups/' + resourceGroup + '/providers/Microsoft.Web/sites/' + appName + '/functions?api-version=2022-03-01', {
         method: 'GET',
         headers: {
-            'Authorization': azureAuthorizationKey
+            'Authorization': accessTokenData.accessToken
         }
     })
         .then(response => response.json())
