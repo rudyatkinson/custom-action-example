@@ -68,7 +68,7 @@ function GetAzureFunctionList(accessTokenData) {
     fetch('https://management.azure.com/subscriptions/' + subscriptionId + '/resourceGroups/' + resourceGroup + '/providers/Microsoft.Web/sites/' + appName + '/functions?api-version=2022-03-01', {
         method: 'GET',
         headers: {
-            'Authorization': accessTokenData.accessToken
+            'Authorization': accessTokenData
         }
     })
         .then(response => response.json())
