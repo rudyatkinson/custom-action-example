@@ -3,6 +3,7 @@ const playFabServer = require("playfab-sdk/Scripts/PlayFab/PlayFabServer");
 const playFabAuthentication = require("playfab-sdk/Scripts/PlayFab/PlayFabAuthentication");
 const playFabCloudScript = require("playfab-sdk/Scripts/PlayFab/PlayFabCloudScript");
 const fetch = require('node-fetch');
+const accessTokenJson = require("./accessToken.json");
 
 const developerSecretKey = core.getInput('developer-secret-key', { required: true });
 const titleId = core.getInput('title-id', { required: true });
@@ -14,16 +15,13 @@ const azureAuthorizationKey = core.getInput('azure-authorization-key', { require
 var accessData;
 
 async function run() {
-    fetch('./accessToken.json')
-        .then((response) => response.json())
-        .then((json) => {
-            accessData = JSON.parse(json);
-            console.log(json);
-            console.log('accessToken: ' + accessData.accessToken);
-
-            GetAzureFunctionList(accessData);
-        });
+    console.log(accessTokenJson);
     
+    accessData = JSON.parse(accessTokenJson);
+    console.log('accessToken: ' + accessData.accessToken);
+
+    GetAzureFunctionList(accessData);
+
 
     playFabServer.settings.developerSecretKey = developerSecretKey;
     playFabServer.settings.titleId = titleId;
