@@ -64,8 +64,8 @@ function ListHttpFunctionsCallback(error, result) {
 }
 
 function GetAzureFunctionList(accessToken) {
-
-    fetch('https://management.azure.com/subscriptions/' + subscriptionId + '/resourceGroups/' + resourceGroup + '/providers/Microsoft.Web/sites/' + appName + '/functions?api-version=2022-03-01', {
+    var urlPath = 'https://management.azure.com/subscriptions/' + subscriptionId + '/resourceGroups/' + resourceGroup + '/providers/Microsoft.Web/sites/' + appName + '/functions?api-version=2022-03-01';
+    fetch(urlPath, {
         method: 'GET',
         headers: {
             'Authorization': accessToken
