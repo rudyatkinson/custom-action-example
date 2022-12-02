@@ -21,7 +21,7 @@ async function run() {
             return;
         }
         console.log("File data:", jsonString);
-        accessData = JSON.parse(accessTokenJson);
+        accessData = JSON.parse(jsonString);
 
         console.log('accessToken: ' + accessData.accessToken);
         GetAzureFunctionList(accessData);
