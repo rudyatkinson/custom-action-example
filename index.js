@@ -7,11 +7,31 @@ const fetch = require('node-fetch');
 const developerSecretKey = core.getInput('developer-secret-key', { required: true });
 const titleId = core.getInput('title-id', { required: true });
 const subscriptionId = core.getInput('subscription-id', { required: true });
-const resourceGroup = core.getInput('resource-group', {required: true});
-const appName = core.getInput('app-name', {required: true});
-const azureAuthorizationKey = core.getInput('azure-authorization-key', {required: true});
+const resourceGroup = core.getInput('resource-group', { required: true });
+const appName = core.getInput('app-name', { required: true });
+const azureAuthorizationKey = core.getInput('azure-authorization-key', { required: true });
+
+var accessData;
 
 async function run() {
+
+    var accessToken = new File("accessToken.json");
+
+    if (accessToken.exists()) {
+        console.log('accessToken.json found.');
+    }
+    else {
+        core.setFailed('accessToken.json cannot found.');
+    }
+
+    fetch('./accessToken.json')
+        .then((response) => response.json())
+        .then((json) => {
+            accessData = JSON.parse(json);
+            console.log(json)});
+
+    console.log('accessToken: ' + accessData.accessToken);
+
     playFabServer.settings.developerSecretKey = developerSecretKey;
     playFabServer.settings.titleId = titleId;
 
@@ -58,8 +78,8 @@ function GetAzureFunctionList() {
             'Authorization': azureAuthorizationKey
         }
     })
-    .then(response => response.json())
-    .then(response => console.log(JSON.stringify(response)));
+        .then(response => response.json())
+        .then(response => console.log(JSON.stringify(response)));
 }
 
 run();
