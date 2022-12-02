@@ -24,7 +24,7 @@ async function run() {
         accessData = JSON.parse(jsonString);
 
         console.log('accessToken: ' + accessData.accessToken);
-        GetAzureFunctionList(jsonString);
+        GetAzureFunctionList(accessData);
     });
 
     playFabServer.settings.developerSecretKey = developerSecretKey;
@@ -63,12 +63,12 @@ function ListHttpFunctionsCallback(error, result) {
     });
 }
 
-function GetAzureFunctionList(accessToken) {
+function GetAzureFunctionList(accessTokenData) {
     var urlPath = 'https://management.azure.com/subscriptions/' + subscriptionId + '/resourceGroups/' + resourceGroup + '/providers/Microsoft.Web/sites/' + appName + '/functions?api-version=2022-03-01';
     fetch(urlPath, {
         method: 'GET',
         headers: {
-            'Authorization': accessToken
+            'Authorization': "Bearer " + accessTokenData.accessToken
         }
     })
         .then(response => response.json())
