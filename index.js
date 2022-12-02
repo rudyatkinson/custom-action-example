@@ -14,21 +14,12 @@ const azureAuthorizationKey = core.getInput('azure-authorization-key', { require
 var accessData;
 
 async function run() {
-
-    var accessToken = new File("accessToken.json");
-
-    if (accessToken.exists()) {
-        console.log('accessToken.json found.');
-    }
-    else {
-        core.setFailed('accessToken.json cannot found.');
-    }
-
     fetch('./accessToken.json')
         .then((response) => response.json())
         .then((json) => {
             accessData = JSON.parse(json);
-            console.log(json)});
+            console.log(json)
+        });
 
     console.log('accessToken: ' + accessData.accessToken);
 
