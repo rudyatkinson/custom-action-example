@@ -22,14 +22,13 @@ async function run() {
             console.log('accessToken: ' + accessData.accessToken);
 
             GetAzureFunctionList(accessData);
-
-            var getEntityTokenRequest = {};
         });
     
 
     playFabServer.settings.developerSecretKey = developerSecretKey;
     playFabServer.settings.titleId = titleId;
 
+    var getEntityTokenRequest = {};
     playFabAuthentication.GetEntityToken(getEntityTokenRequest, GetEntityTokenCallback);
 }
 
