@@ -20,6 +20,3 @@ inputs:
   app-name:
     required: true
     description: "Function app name"
-  azure-authorization-key:
-    required: true
-    description: "Azure authorization key, you can access it from azure cli after you logged in."
